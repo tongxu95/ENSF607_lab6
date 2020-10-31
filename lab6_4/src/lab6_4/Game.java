@@ -1,6 +1,7 @@
 package lab6_4;
 
 import java.io.*;
+import java.net.Socket;
 
 /**
  * Read from the user the name of 'X' player, 'O' player, and appoint a referee to
@@ -11,7 +12,7 @@ import java.io.*;
  * @since Sep 28, 2020
  * 
  */
-public class Game implements Constants {
+public class Game implements Constants, Runnable {
 	/**
 	 * 3x3 tic-tac-toe board
 	 */
@@ -23,10 +24,17 @@ public class Game implements Constants {
 	private Referee theRef;
 	
 	/**
-	 * Construct a Game with a tic-tae-toe Board.
+	 * array consisting of two client sockets for X player and O player
 	 */
-    public Game( ) {
-        theBoard  = new Board();
+	private Socket[] sockets;
+	
+	/**
+	 * Construct a Game with a tic-tae-toe Board.
+	 * @param player array consisting of 2 client Sockets
+	 */
+    public Game(Socket[] players) {
+        theBoard  = new Board();      
+        sockets = players;
 	}
     
     /**
@@ -39,42 +47,42 @@ public class Game implements Constants {
         System.out.println("\nReferee started the game...\n");
         theRef.runTheGame();
     }
-	
-	public static void main(String[] args) throws IOException {
-		Referee theRef;
-		Player xPlayer, oPlayer;
-		BufferedReader stdin;
-		Game theGame = new Game();
-		stdin = new BufferedReader(new InputStreamReader(System.in));
-		
-		// get the name of Player 'X' from user and initialize Player 'X'
-		System.out.print("\nPlease enter the name of the \'X\' player: ");
-		String name= stdin.readLine();
-		while (name == null) {
-			System.out.print("Please try again: ");
-			name = stdin.readLine();
-		}
 
-		xPlayer = new Player(name, LETTER_X);
-		xPlayer.setBoard(theGame.theBoard);
+	@Override
+	public void run() {
 		
-		// get the name of Player 'O' from user and initialize Player 'O'
-		System.out.print("\nPlease enter the name of the \'O\' player: ");
-		name = stdin.readLine();
-		while (name == null) {
-			System.out.print("Please try again: ");
-			name = stdin.readLine();
-		}
-		
-		oPlayer = new Player(name, LETTER_O);
-		oPlayer.setBoard(theGame.theBoard);
-		
-		// initialize Referee; appoint referee to game and runs game
-		theRef = new Referee();
-		theRef.setBoard(theGame.theBoard);
-		theRef.setoPlayer(oPlayer);
-		theRef.setxPlayer(xPlayer);
-        
-		theGame.appointReferee(theRef);
+    	try(
+			PrintWriter xOut = new PrintWriter(sockets[0].getOutputStream(), true);
+			BufferedReader xIn = new BufferedReader(new InputStreamReader(sockets[0].getInputStream()));
+    		PrintWriter oOut = new PrintWriter(sockets[1].getOutputStream(), true);
+    		BufferedReader oIn = new BufferedReader(new InputStreamReader(sockets[1].getInputStream()))
+		){
+    		// change return type of display() from void to String
+    		xOut.println(theBoard.display());
+    		oOut.println(theBoard.display());
+    		
+    		xOut.print("Message: WELCOME TO THE GAME.\nGet the name of the X player: ");
+			String xName = xIn.readLine();
+			xOut.print("Message: Waiting for opponent to connect");
+			Player xPlayer = new Player(xName, LETTER_X);
+			xPlayer.setBoard(theBoard);
+			
+    		oOut.print("Message: WELCOME TO THE GAME.\nGet the name of the O player: ");
+			String oName = xIn.readLine();
+			Player oPlayer = new Player(oName, LETTER_O);
+			oPlayer.setBoard(theBoard);
+				
+			// initialize Referee; appoint referee to game and runs game
+			Referee theRef = new Referee();
+			theRef.setBoard(theBoard);
+			theRef.setoPlayer(oPlayer);
+			theRef.setxPlayer(xPlayer);       
+			appointReferee(theRef);
+			
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}			
+	
 	}
+
 }

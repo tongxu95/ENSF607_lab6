@@ -78,18 +78,19 @@ public class Board implements Constants {
 	/**
 	 * Display the tic-tac-toe board.
 	 */
-	public void display() {
-		displayColumnHeaders();
-		addHyphens();
+	public String display() {
+		StringBuilder board = new StringBuilder(displayColumnHeaders());
+		board.append(addHyphens());
 		for (int row = 0; row < 3; row++) {
-			addSpaces();
-			System.out.print("    row " + row + ' ');
+			board.append(addSpaces());
+			board.append("    row " + row + ' ');
 			for (int col = 0; col < 3; col++)
-				System.out.print("|  " + getMark(row, col) + "  ");
-			System.out.println("|");
-			addSpaces();
-			addHyphens();
+				board.append("|  " + getMark(row, col) + "  ");
+			board.append("|");
+			board.append(addSpaces());
+			board.append(addHyphens());
 		}
+		return board.toString();
 	}
 
 	/**
@@ -164,31 +165,36 @@ public class Board implements Constants {
 	/**
 	 * Display colume header
 	 */
-	void displayColumnHeaders() {
-		System.out.print("          ");
+	String displayColumnHeaders() {
+		StringBuilder header = new StringBuilder("          ");
 		for (int j = 0; j < 3; j++)
-			System.out.print("|col " + j);
-		System.out.println();
+			header.append("|col " + j);
+		header.append('\n');
+		return header.toString();
 	}
 
 	/**
 	 * Display board cell borders with hyphens.
+	 * @return 
 	 */
-	void addHyphens() {
-		System.out.print("          ");
+	String addHyphens() {
+		StringBuilder hyphens = new StringBuilder("          ");
 		for (int j = 0; j < 3; j++)
-			System.out.print("+-----");
-		System.out.println("+");
+			hyphens.append(("+-----"));
+		hyphens.append(("+"));
+		return hyphens.toString();
 	}
 	
 	/**
 	 * Fill cells with spaces.
+	 * @return 
 	 */
-	void addSpaces() {
-		System.out.print("          ");
+	String addSpaces() {
+		StringBuilder spaces = new StringBuilder("          ");
 		for (int j = 0; j < 3; j++)
-			System.out.print("|     ");
-		System.out.println("|");
+			spaces.append("|     ");
+		spaces.append("|");
+		return spaces.toString();
 	}
 
 }
