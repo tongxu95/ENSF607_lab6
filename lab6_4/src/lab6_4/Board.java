@@ -86,7 +86,7 @@ public class Board implements Constants {
 			board.append("    row " + row + ' ');
 			for (int col = 0; col < 3; col++)
 				board.append("|  " + getMark(row, col) + "  ");
-			board.append("|");
+			board.append("|\n");
 			board.append(addSpaces());
 			board.append(addHyphens());
 		}
@@ -181,7 +181,7 @@ public class Board implements Constants {
 		StringBuilder hyphens = new StringBuilder("          ");
 		for (int j = 0; j < 3; j++)
 			hyphens.append(("+-----"));
-		hyphens.append(("+"));
+		hyphens.append(("+\n"));
 		return hyphens.toString();
 	}
 	
@@ -193,7 +193,7 @@ public class Board implements Constants {
 		StringBuilder spaces = new StringBuilder("          ");
 		for (int j = 0; j < 3; j++)
 			spaces.append("|     ");
-		spaces.append("|");
+		spaces.append("|\n");
 		return spaces.toString();
 	}
 

@@ -43,9 +43,9 @@ public class Server {
 
 	private void serve() {
 		try {
-			while(true) {
 
-	            System.out.println("Server is running...");
+            System.out.println("Server is running...");
+			while(true) {
 	            
 				for (int i = 0; i < players.length; i++) {
 					players[i] = serverSocket.accept();

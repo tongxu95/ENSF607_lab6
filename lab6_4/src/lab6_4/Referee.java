@@ -37,8 +37,8 @@ public class Referee {
 	public void runTheGame() {
 		xPlayer.setOpponent(oPlayer);
 		oPlayer.setOpponent(xPlayer);
-		board.display();
-		xPlayer.play();
+//		board.display();
+//		xPlayer.play();
 	}
 	
 	/**
