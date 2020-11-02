@@ -1,10 +1,8 @@
-# ENSF607_lab6
+# Completed by: Tong Xu, Shiyu Zhou
 
-## Client/Server Programming
+## ENSF 607 Lab 6
 
-### Completed by: Tong Xu, Shiyu Zhou
-
-
+### Client/Server Programming
 
 #### Exercise 1: A Very Simple Client-Server Program
 #### Exercise 2: Date-Time Server
