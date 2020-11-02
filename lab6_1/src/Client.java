@@ -5,10 +5,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client {
-	private PrintWriter socketOut;
-	private Socket palinSocket;
-	private BufferedReader stdIn;
-	private BufferedReader socketIn;
+	private PrintWriter socketOut; //write to server
+	private Socket palinSocket; //handle IO for server
+	private BufferedReader stdIn; //read from user input
+	private BufferedReader socketIn; //read from server
 
 	public Client(String serverName, int portNumber) {
 		try {
