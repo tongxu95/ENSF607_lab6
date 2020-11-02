@@ -1,5 +1,7 @@
 package lab6_5;
 
+import java.util.Arrays;
+
 /**
  * Provide data fields and methods to create and display a 3x3 
  * tic-tac-toe board and check the winner.
@@ -76,21 +78,19 @@ public class Board implements Constants {
 	}
 
 	/**
-	 * Display the tic-tac-toe board.
+	 * Display the tic-tac-toe board. 
 	 */
 	public String display() {
-		StringBuilder board = new StringBuilder(displayColumnHeaders());
-		board.append(addHyphens());
-		for (int row = 0; row < 3; row++) {
-			board.append(addSpaces());
-			board.append("    row " + row + ' ');
-			for (int col = 0; col < 3; col++)
-				board.append("|  " + getMark(row, col) + "  ");
-			board.append("|\n");
-			board.append(addSpaces());
-			board.append(addHyphens());
+		StringBuilder boardState = new StringBuilder();
+		for (int i = 0; i < 3; i++) {
+			boardState.append("ROW " + i + ":");
+			for (int j = 0; j < 3; j++) {
+				boardState.append(getMark(i,j) + ",");
+			}
+			boardState.append("\n");
 		}
-		return board.toString();
+		return boardState.toString();
+
 	}
 
 	/**
@@ -160,41 +160,6 @@ public class Board implements Constants {
 				result = 1;
 		}
 		return result;
-	}
-
-	/**
-	 * Display colume header
-	 */
-	String displayColumnHeaders() {
-		StringBuilder header = new StringBuilder("          ");
-		for (int j = 0; j < 3; j++)
-			header.append("|col " + j);
-		header.append('\n');
-		return header.toString();
-	}
-
-	/**
-	 * Display board cell borders with hyphens.
-	 * @return 
-	 */
-	String addHyphens() {
-		StringBuilder hyphens = new StringBuilder("          ");
-		for (int j = 0; j < 3; j++)
-			hyphens.append(("+-----"));
-		hyphens.append(("+\n"));
-		return hyphens.toString();
-	}
-	
-	/**
-	 * Fill cells with spaces.
-	 * @return 
-	 */
-	String addSpaces() {
-		StringBuilder spaces = new StringBuilder("          ");
-		for (int j = 0; j < 3; j++)
-			spaces.append("|     ");
-		spaces.append("|\n");
-		return spaces.toString();
 	}
 
 }

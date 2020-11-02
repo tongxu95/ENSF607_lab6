@@ -128,36 +128,13 @@ public class Game implements Constants, Runnable {
 			char mark = currentPlayer.getMark();
 			
 			out.println(name + ", it is your turn to make a move");
+			// modified display()
 			out.println(theBoard.display());
+			out.println("MAKEMOVE");
 			
-			out.printf("%s, what row should your next %c be placed in (enter 0, 1, or 2)?\n",
-					name, mark);
-	 		out.println("EOF");
-	 		
-			String srow = in.readLine();
-			while (! srow.matches("[0-2]")) {
-				out.println("Invalid input, please try again.");
-		 		out.println("EOF");
-				srow = in.readLine();
-			}
-			int row = Integer.parseInt(srow);
-			
-			out.printf("%s, what col should your next %c be placed in (enter 0, 1, or 2)?\n",
-					name, mark);
-	 		out.println("EOF");
-			String scol = in.readLine();
-			while (! scol.matches("[0-2]")) {
-				out.println("Invalid input, please try again.");
-		 		out.println("EOF");
-				scol = in.readLine();
-			}
-			int col = Integer.parseInt(scol);
-			
-			if (theBoard.getMark(row, col) != SPACE_CHAR) {
-				makeMove(currentPlayer);
-			} else {
-				theBoard.addMark(row, col, mark);
-			}
+			int row = Integer.parseInt(in.readLine());
+			int col = Integer.parseInt(in.readLine());
+			theBoard.addMark(row, col, mark);
 			
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -168,19 +145,15 @@ public class Game implements Constants, Runnable {
 	@Override
 	public void run() {
     	try{  	    				
-    		// change return type of display() from void to String
-    		xOut.println(theBoard.display());
-    		oOut.println(theBoard.display());
-    		
-    		xOut.println("Message: WELCOME TO THE GAME.\nGet the name of the X player: ");
-     		xOut.println("EOF");
+    		xOut.println("MARK:X");
+			oOut.println("MARK:O");
+    		xOut.println("Message: WELCOME TO THE GAME.\nGet the name of the X player:");
 			String xName = xIn.readLine();
 			xOut.println("Message: Waiting for opponent to connect");
 			xPlayer = new Player(xName, LETTER_X);
 			xPlayer.setBoard(theBoard);
 			
-    		oOut.println("Message: WELCOME TO THE GAME.\nGet the name of the O player: ");
-     		oOut.println("EOF");
+    		oOut.println("Message: WELCOME TO THE GAME.\nGet the name of the O player:");
     		String oName = oIn.readLine();
 			oPlayer = new Player(oName, LETTER_O);
 			oPlayer.setBoard(theBoard);
