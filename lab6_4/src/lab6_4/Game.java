@@ -177,17 +177,14 @@ public class Game implements Constants, Runnable {
 			String xName = xIn.readLine();
 			xOut.println("Message: Waiting for opponent to connect");
 			xPlayer = new Player(xName, LETTER_X);
-			xPlayer.setBoard(theBoard);
 			
     		oOut.println("Message: WELCOME TO THE GAME.\nGet the name of the O player: ");
      		oOut.println("EOF");
     		String oName = oIn.readLine();
 			oPlayer = new Player(oName, LETTER_O);
-			oPlayer.setBoard(theBoard);
 				
 			// initialize Referee; appoint referee to game and runs game
 			Referee theRef = new Referee();
-			theRef.setBoard(theBoard);
 			theRef.setoPlayer(oPlayer);
 			theRef.setxPlayer(xPlayer);       
 			appointReferee(theRef);

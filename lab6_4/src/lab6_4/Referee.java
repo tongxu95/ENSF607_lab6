@@ -17,11 +17,6 @@ public class Referee {
 	// attribute oPlayer is not used by class Referee and could have been 
 	// omitted
 	private Player xPlayer, oPlayer;
-	
-	/**
-	 * 3x3 tic-tac-toe board
-	 */
-	private Board board;
 
 	/**
 	 * Construct a Referee object.
@@ -37,16 +32,6 @@ public class Referee {
 	public void runTheGame() {
 		xPlayer.setOpponent(oPlayer);
 		oPlayer.setOpponent(xPlayer);
-//		board.display();
-//		xPlayer.play();
-	}
-	
-	/**
-	 * Set the given board as the board used for the game
-	 * @param board a 3x3 tic-tac-toe board
-	 */
-	public void setBoard(Board board) {
-		this.board = board;
 	}
 	
 	/**

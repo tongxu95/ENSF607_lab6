@@ -1,7 +1,5 @@
 package lab6_5;
 
-import java.util.Arrays;
-
 /**
  * Provide data fields and methods to create and display a 3x3 
  * tic-tac-toe board and check the winner.

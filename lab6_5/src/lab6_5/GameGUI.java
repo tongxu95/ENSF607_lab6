@@ -77,11 +77,15 @@ public class GameGUI extends JFrame implements ActionListener {
 			}
 			
 			JLabel label_display = new JLabel("Message Window:");
-			display = new JTextArea(10, 60);
+
+			display = new JTextArea(20, 50);
+//			JScrollPane scrollpane = new JScrollPane(inField);
+//			scrollpane.getViewport().setPreferredSize(new Dimension(400, 400));
+
 			JPanel p2 = new JPanel();
 			p2.setLayout(new BoxLayout(p2, BoxLayout.Y_AXIS));
 			p2.add(label_display);
-			p2.add(display);
+			p2.add(new JScrollPane(display));
 			
 			JPanel p3 = new JPanel();
 			p3.setLayout(new BoxLayout(p3, BoxLayout.X_AXIS));
