@@ -33,8 +33,7 @@ public class WriteRecord {
 	 * @param singerName - singer's name
 	 * @param price - CD price
 	 */
-	public void setRecord(int year, String songName, String singerName,
-                                                                 double price) {
+	public void setRecord(int year, String songName, String singerName, double price) {
 		record.setSongName(songName);
 		record.setSingerName(singerName);
 		record.setYear(year);
@@ -46,8 +45,12 @@ public class WriteRecord {
 	 * @param textFileName name of text file to open
 	 */
 	public void openFileInputStream(String textFileName) {
-        
-     // TO BE COMPLETED BY THE STUDENTS
+		// TO BE COMPLETED BY THE STUDENTS
+		try {
+			textFileIn = new Scanner(new FileInputStream(textFileName));
+		} catch (FileNotFoundException e) {
+			System.err.println("File Not Found");
+		}	
 	}
 
 	/**
@@ -55,9 +58,14 @@ public class WriteRecord {
 	 * @param objectFileName name of the object file to be created
 	 */
 	public void openObjectOutputStream(String objectFileName) {
-        
-    // TO BE COMPLETED BY THE STUDENTS
-        
+		// TO BE COMPLETED BY THE STUDENTS
+		try {
+			objectOut = new ObjectOutputStream(new FileOutputStream(objectFileName));
+		} catch (FileNotFoundException e) {
+			System.err.println("File Not Found");
+		} catch (IOException e) {
+			System.err.println("Error Opening File");
+		}       
 	}
 	
 	/**
@@ -84,10 +92,26 @@ public class WriteRecord {
 			setRecord(year, songName, singerName, price);
 			textFileIn.nextLine();   // read the dashed lines and do nothing
             
-            // THE REST OF THE CODE TO BE COMPLETED BY THE STUDENTS
+            // THE REST OF THE CODE TO BE COMPLETED BY THE STUDENTS		
+			try {
+				record = new MusicRecord(year, songName, singerName, price);
+				objectOut.writeObject(record);
+			} catch(IOException ioException) {
+				System.err.println("Error Writing To File");
+			} catch(NoSuchElementException elementException) {
+				System.err.println("Invalid Input. Please Try Again.");
+			}
+			
 		}
 
-		// YOUR CODE GOES HERE
+		// YOUR CODE GOES HERE	
+		try {
+			if (objectOut != null)
+				objectOut.close();
+		} catch(IOException ioException) {
+			System.err.println("Error Closing File");
+			System.exit(1);
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
