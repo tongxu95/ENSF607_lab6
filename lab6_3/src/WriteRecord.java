@@ -1,9 +1,3 @@
-/**
- * Started by M. Moussavi
- * March 2015
- * Completed by: STUDENT(S) NAME
- */
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -11,7 +5,15 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
+/**
+ * A simple class that writes the music record.
+ * 
+ * Reads in a txt file and outputs a .ser file.
+ * 
+ * @version 1.0
+ * @author Shiyu Zhou
+ * @since Nov 6, 2020
+ */
 public class WriteRecord {
 
 	ObjectOutputStream objectOut = null;

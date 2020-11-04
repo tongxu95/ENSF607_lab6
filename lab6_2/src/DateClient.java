@@ -3,7 +3,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
+/**
+ * Client side of the program what connects to a date server.
+ * @version 1.0
+ * @author Shiyu Zhou
+ * @since Nov 6, 2020
+ */
 public class DateClient {
 	
 	private PrintWriter socketOut; //write to server

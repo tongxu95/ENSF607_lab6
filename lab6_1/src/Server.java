@@ -4,7 +4,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-
+/**
+ * Server side of a program to check if a word is a palindrome.
+ * 
+ * @version 1.0
+ * @author Shiyu Zhou
+ * @since Nov 6, 2020
+ */
 public class Server {
 
 	private Socket palinSocket;

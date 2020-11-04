@@ -1,14 +1,17 @@
-/** 
- * Started by M. Moussavi
- * March 2015
- * Completed by: STUDENT(S) NAME
- */
-
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+/**
+ * A simple class that reads the music record.
+ * 
+ * Reads in a .ser file and outputs a .txt file.
+ * 
+ * @version 1.0
+ * @author Shiyu Zhou
+ * @since Nov 6, 2020
+ */
 public class ReadRecord {
     
     private ObjectInputStream input;
